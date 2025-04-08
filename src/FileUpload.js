@@ -8,26 +8,22 @@ const FileUpload = () => {
   const fileInputRef = useRef(null);
   const dropZoneRef = useRef(null);
 
-  const MAX_FILE_SIZE = 30 * 1024 * 1024; // 30MB in bytes
+  const MAX_FILE_SIZE = 30 * 1024 * 1024;  
 
-  // Prevent default drag behaviors
-  const preventDefaults = (e) => {
+   const preventDefaults = (e) => {
     e.preventDefault();
     e.stopPropagation();
   };
 
-  // Highlight drop zone
-  const highlight = () => {
+   const highlight = () => {
     dropZoneRef.current.classList.add('drag-over');
   };
 
-  // Unhighlight drop zone
-  const unhighlight = () => {
+   const unhighlight = () => {
     dropZoneRef.current.classList.remove('drag-over');
   };
 
-  // Handle file drop
-  const handleDrop = (e) => {
+   const handleDrop = (e) => {
     preventDefaults(e);
     const droppedFiles = e.dataTransfer.files;
     if (droppedFiles.length > 0) {
@@ -35,8 +31,7 @@ const FileUpload = () => {
     }
   };
 
-  // Add files to state
-  const addFiles = (newFiles) => {
+   const addFiles = (newFiles) => {
     const updatedFiles = [...files];
     newFiles.forEach((file) => {
       if (file.size > MAX_FILE_SIZE) {
@@ -58,12 +53,11 @@ const FileUpload = () => {
     const selectedFiles = e.target.files;
     if (selectedFiles && selectedFiles.length > 0) {
       addFiles([...selectedFiles]);
-      fileInputRef.current.value = null; // Reset input
+      fileInputRef.current.value = null;  
     }
   };
 
-  // Format file size
-  const formatFileSize = (bytes) => {
+   const formatFileSize = (bytes) => {
     if (bytes === 0) return '0 Bytes';
     const k = 1024;
     const sizes = ['Bytes', 'KB', 'MB', 'GB'];
@@ -71,8 +65,7 @@ const FileUpload = () => {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
   };
 
-  // Remove file
-  const removeFile = (index) => {
+   const removeFile = (index) => {
     const updatedFiles = files.filter((_, i) => i !== index);
     setFiles(updatedFiles);
   };
@@ -95,7 +88,7 @@ const FileUpload = () => {
         }
         return prev + 20;
       });
-    }, 300); // Simulates a 1.5-second upload
+    }, 300);  
   };
 
   return (
